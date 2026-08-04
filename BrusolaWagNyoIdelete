@@ -34,3 +34,47 @@ Case
 End as Remarks
 from grade
 order by vSubject
+
+
+/Updated
+create database Mysample
+
+use Mysample
+
+create table grade (
+vStudent_ID varchar(10), 
+vLastName varchar(10), 
+vFirstName varchar(10), 
+vSubject varchar(15), 
+iPrelim float, 
+iMidterm float, 
+iPrefinal float, 
+iFinal float,
+SemGrade float); 
+
+insert into grade values 
+('2000395273', 'Brusola', 'Jorge', 'InfoManagement', 95, 95, 95, 100, 00),
+('2000395273', 'Brusola', 'Jorge', 'Prog1', 90, 89, 88, 89, 00),
+('2000395273', 'Brusola', 'Jorge', 'DataStructure', 90, 85, 84, 89, 00),
+('2000123456', 'Onyek', 'Kaili', 'InfoManagement', 55, 59, 60, 51, 00),
+('2000123456', 'Onyek', 'Kaili', 'Prog1', 90, 89, 88, 89, 00),
+('2000123456', 'Onyek', 'Kaili', 'DataStructure', 65, 59, 60, 41, 00),
+('2000234567', 'Lebron', 'Kobe', 'Prog1', 90, 89, 88, 89, 00),
+('2000234567', 'Lebron', 'Kobe', 'InfoManagement', 95, 95, 95, 100, 00),
+('2000234567', 'Lebron', 'Kobe', 'DataStructure', 93, 80, 83, 93, 00),
+('2000345678', 'Sotto', 'Kai', 'Prog1', 62, 59, 58, 60, 00)
+
+drop table grade
+
+update grade 
+Set SemGrade = ((iPrelim * 0.2 ) + (iMidterm * 0.2) + (iPrefinal * 0.2) + (iFinal * 0.4))
+
+select vFirstName, vLastname, vSubject, iPrelim, iMidterm, iPrefinal, iFinal, SemGrade,
+Case 
+	when SemGrade < 60.00
+	then 'Failed' 
+	else 'Passed'
+End as Remarks
+from grade
+where vSubject IS NOT NULL
+order by vSubject
