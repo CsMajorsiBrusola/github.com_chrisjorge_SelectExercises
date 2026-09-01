@@ -1,0 +1,28 @@
+--Number 5
+Select C.Cust_Name, I.ItemName, I.Price
+from Orders O
+join Customers C on O.CustomerID = C.CustomerID
+join Items I on I.ItemID = O.ItemID
+
+where I.price > (Select price  from Items I
+	 where ItemID = (Select ItemID from Orders O 
+		where CustomerID = (Select CustomerID from Customers
+			where Cust_Name = 'Badang')))
+
+--Number 6
+Select CONCAT ('Lab_', 
+		(Select substring (O.OrderID, 1,5)))
+		AS 'New OrderID', C.Cust_Name, C.Address, I.ItemName, I.Price
+from Orders O
+join Customers C on O.CustomerID = C.CustomerID
+join Items I on I.ItemID = O.ItemID
+
+where I.price > (Select price  from Items I
+	 where ItemID = (Select ItemID from Orders O 
+		where CustomerID = (Select CustomerID from Customers
+			where Cust_Name = 'Badang')))
+
+--Number 7
+
+
+--Number 8
