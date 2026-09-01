@@ -1,4 +1,15 @@
---Number 5
+Create Database Handsout
+
+use Handsout
+
+--Data_Insert.txt
+
+--Number 3 eto ay NUMBER 3
+Create Index CustomerID on Customers (CustomerID, Cust_Name)
+Create Index ItemID on Items (ItemID, ItemName)
+Create Index OrderID on Orders (OrderID, CustomerID)
+
+--Number 5 eto ay NUMBER 5
 Select C.Cust_Name, I.ItemName, I.Price
 from Orders O
 join Customers C on O.CustomerID = C.CustomerID
@@ -9,7 +20,7 @@ where I.price > (Select price  from Items I
 		where CustomerID = (Select CustomerID from Customers
 			where Cust_Name = 'Badang')))
 
---Number 6
+--Number 6 eto ay NUMBER 6
 Select CONCAT ('Lab_', 
 		(Select substring (O.OrderID, 1,5)))
 		AS 'New OrderID', C.Cust_Name, C.Address, I.ItemName, I.Price
@@ -22,7 +33,23 @@ where I.price > (Select price  from Items I
 		where CustomerID = (Select CustomerID from Customers
 			where Cust_Name = 'Badang')))
 
---Number 7
+--Number 7 eto ay NUMBER 7
+Create View Subquery_View as 
+Select Concat ('Lab_', 
+        (Select substring (O.OrderID, 1,5)))
+        AS 'New OrderID', C.Cust_Name, C.Address, I.ItemName, I.Price
+from Orders O
+join Customers C on O.CustomerID = C.CustomerID
+join Items I on I.ItemID = O.ItemID
 
+where I.price > (Select price  from Items I
+	 where ItemID = (Select ItemID from Orders O 
+		where CustomerID = (Select CustomerID from Customers
+			where Cust_Name = 'Badang')))
 
---Number 8
+Select * from Subquery_View
+
+--Number 8 eto ay NUMBER 8
+Select * from Subquery_View
+Where Address in (Select Address from Customers
+        Where Address = 'Taguig' or Address = 'Navotas' or Address = 'Laguna')
